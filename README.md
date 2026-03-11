@@ -47,6 +47,7 @@ A cross-browser extension built with [WXT](https://wxt.dev) that brings Cal.com 
 | Mobile app | [Expo](https://expo.dev) (React Native) with [Expo Router](https://docs.expo.dev/router/introduction/) |
 | Styling | [NativeWind](https://www.nativewind.dev/) (Tailwind CSS for React Native) |
 | Browser extension | [WXT](https://wxt.dev) (next-gen web extension framework) |
+| CLI | [Commander.js](https://github.com/tj/commander.js) with auto-generated [hey-api](https://heyapi.dev/) client |
 | Data fetching | [TanStack Query](https://tanstack.com/query) with persistent cache |
 | iOS widget | SwiftUI + WidgetKit |
 | Android widget | [react-native-android-widget](https://github.com/nickkraakman/react-native-android-widget) |
@@ -119,6 +120,11 @@ bun run ext:zip-chrome-prod
 │   ├── entrypoints/      # Background script & content script
 │   ├── lib/              # Gmail, LinkedIn, Google Calendar integrations
 │   └── public/           # Extension icons & static assets
+├── packages/
+│   └── cli/              # @calcom/cli - Command-line interface
+│       ├── src/commands/ # CLI commands (bookings, event-types, etc.)
+│       ├── src/generated/# Auto-generated API client from OpenAPI
+│       └── src/shared/   # Auth, config, error handling
 ├── hooks/                # Custom React hooks
 ├── services/             # Cal.com API client & OAuth service
 ├── contexts/             # React context providers (Auth, Query, Toast)
@@ -140,6 +146,8 @@ bun run ext:zip-chrome-prod
 | `bun run web` | Run in the browser via Expo |
 | `bun run ext` | Start extension dev server (WXT) |
 | `bun run ext:build-all` | Build extension for all browsers |
+| `bun run --filter @calcom/cli dev` | Run CLI in dev mode |
+| `bun run --filter @calcom/cli build` | Build CLI package |
 | `bun run typecheck` | Type-check the mobile app |
 | `bun run typecheck:extension` | Type-check the browser extension |
 | `bun run lint` | Lint with Biome |
@@ -153,6 +161,67 @@ This repo uses [Biome](https://biomejs.dev/) for linting and formatting, enforce
 ```sh
 bun run check:ci
 bun run typecheck:all
+```
+
+## CLI
+
+A command-line interface for interacting with the Cal.com API v2. Available as `@calcom/cli` on npm.
+
+### Installation
+
+```sh
+npm install -g @calcom/cli
+# or
+bun add -g @calcom/cli
+```
+
+### Authentication
+
+```sh
+# Interactive prompt (choose API key or OAuth)
+calcom login
+
+# Direct API key authentication
+calcom login --api-key <your-api-key>
+
+# OAuth authentication
+calcom login --oauth --client-id <id> --client-secret <secret>
+
+# Logout
+calcom logout
+```
+
+### Commands
+
+| Command | Description |
+|---------|-------------|
+| `calcom me` | View your profile |
+| `calcom agenda` | View your upcoming schedule |
+| `calcom bookings list` | List all bookings |
+| `calcom bookings get <uid>` | Get a specific booking |
+| `calcom bookings create` | Create a new booking |
+| `calcom bookings cancel <uid>` | Cancel a booking |
+| `calcom bookings reschedule <uid>` | Reschedule a booking |
+| `calcom event-types list` | List event types |
+| `calcom schedules list` | List availability schedules |
+| `calcom calendars list` | List connected calendars |
+| `calcom slots` | Check available time slots |
+| `calcom teams list` | List teams |
+| `calcom webhooks list` | List webhooks |
+
+Most commands support `--json` for JSON output and various filtering options. Run `calcom <command> --help` for details.
+
+### Development
+
+```sh
+# Run CLI in dev mode
+bun run --filter @calcom/cli dev
+
+# Regenerate API client from OpenAPI spec
+bun run --filter @calcom/cli generate
+
+# Build the package
+bun run --filter @calcom/cli build
 ```
 
 ## Chat Bot — Telegram Setup
