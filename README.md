@@ -165,53 +165,7 @@ bun run typecheck:all
 
 ## CLI
 
-A command-line interface for interacting with the Cal.com API v2. Available as `@calcom/cli` on npm.
-
-### Installation
-
-```sh
-npm install -g @calcom/cli
-# or
-bun add -g @calcom/cli
-```
-
-### Authentication
-
-```sh
-# Interactive prompt (choose API key or OAuth)
-calcom login
-
-# Direct API key authentication
-calcom login --api-key <your-api-key>
-
-# OAuth authentication
-calcom login --oauth --client-id <id> --client-secret <secret>
-
-# Logout
-calcom logout
-```
-
-### Commands
-
-| Command | Description |
-|---------|-------------|
-| `calcom me` | View your profile |
-| `calcom agenda` | View your upcoming schedule |
-| `calcom bookings list` | List all bookings |
-| `calcom bookings get <uid>` | Get a specific booking |
-| `calcom bookings create` | Create a new booking |
-| `calcom bookings cancel <uid>` | Cancel a booking |
-| `calcom bookings reschedule <uid>` | Reschedule a booking |
-| `calcom event-types list` | List event types |
-| `calcom schedules list` | List availability schedules |
-| `calcom calendars list` | List connected calendars |
-| `calcom slots` | Check available time slots |
-| `calcom teams list` | List teams |
-| `calcom webhooks list` | List webhooks |
-
-Most commands support `--json` for JSON output and various filtering options. Run `calcom <command> --help` for details.
-
-### Development
+A command-line interface for interacting with the Cal.com API v2.
 
 ```sh
 # Run CLI in dev mode
