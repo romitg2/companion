@@ -146,8 +146,8 @@ bun run ext:zip-chrome-prod
 | `bun run web` | Run in the browser via Expo |
 | `bun run ext` | Start extension dev server (WXT) |
 | `bun run ext:build-all` | Build extension for all browsers |
-| `bun run --filter @calcom/cli dev` | Run CLI in dev mode |
-| `bun run --filter @calcom/cli build` | Build CLI package |
+| `bun --filter @calcom/cli dev` | Run CLI in dev mode |
+| `bun --filter @calcom/cli build` | Build CLI package |
 | `bun run typecheck` | Type-check the mobile app |
 | `bun run typecheck:extension` | Type-check the browser extension |
 | `bun run lint` | Lint with Biome |
@@ -169,13 +169,13 @@ A command-line interface for interacting with the Cal.com API v2.
 
 ```sh
 # Run CLI in dev mode
-bun run --filter @calcom/cli dev
+bun --filter @calcom/cli dev
 
 # Regenerate API client from OpenAPI spec
-bun run --filter @calcom/cli generate
+bun --filter @calcom/cli generate
 
 # Build the package
-bun run --filter @calcom/cli build
+bun --filter @calcom/cli build
 ```
 
 ## Chat Bot — Telegram Setup
